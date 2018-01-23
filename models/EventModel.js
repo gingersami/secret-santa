@@ -1,5 +1,6 @@
 const Promise = require("bluebird");
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 const User = require('../models/UserModel.js');
 
 
@@ -17,6 +18,8 @@ const  eventSchema = new mongoose.Schema({
     status:Boolean,
     num:Number
 });
+eventSchema.plugin(AutoIncrement, { inc_field: 'id' });
+
 const Event = mongoose.model('event', eventSchema);
 
 module.exports = Event;
