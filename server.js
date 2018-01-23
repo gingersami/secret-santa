@@ -23,9 +23,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/createEvent/index1.html'));
 });
-app.get('/event', function (req, res) {
-    res.send(data)
-});
+
+app.get('/event/:eventid', function(req,res){
+    res.sendFile(path.join(__dirname + '/public/EventPage/index3.html'));
+})
+
 app.get('/events', function(req, res){
     res.sendFile(path.join(__dirname + '/public/EventsListed/index2.html'));
 
@@ -50,8 +52,8 @@ app.post('/event/:eventid', function () {
 app.post('/createEvent', function (req, res) {
     var event = new Event({
         name: req.body.name,
-        status: true
-
+        status: true,
+        num:req.body.num
     });
     event.save(function (err, data) {
         if (err) console.log(err);
