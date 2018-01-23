@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost:27017/SecretSantaDB', function () {
 });
 
 const Event = require('./models/EventModel.js');
+const User = require('./models/UserModel.js');
 
 const app = express();
 
