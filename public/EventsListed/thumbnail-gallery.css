@@ -61,13 +61,38 @@ body {
 .baguetteBox-button {
     background-color: transparent !important;
 }
-.test{
-    width: 50vw;
-    min-height: 50vh;
+/* img{ */
+    /* width: 50vw; */
+    /* min-height: 50vh;
     object-fit: fill;
+    position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* margin-right: -50%; */
+    /* transform: translate(-50%, -50%) */
+/* } */
+.test{
+   height: 500px;
+   position: relative;
+   
+}
+.lightbox{
+    
+    /* width: 300px; */
+}
+/* .thumbnail{
+    pos
+    width: 300px;
+   
+} */
+.son{
+    
+}
+.caption{
+    height:500px;
+    background-color: yellow;
+    margin: auto;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+    top: 0; left: 0; bottom: 0; right: 0; 
+    z-index: -1;
 }
