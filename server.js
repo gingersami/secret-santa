@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
+const path = require('path')
 
 
 mongoose.connect('mongodb://localhost:27017/SecretSantaDB', function () {
@@ -9,6 +10,7 @@ mongoose.connect('mongodb://localhost:27017/SecretSantaDB', function () {
 });
 
 const Event = require('./models/EventModel.js');
+const User = require('./models/UserModel.js');
 
 const app = express();
 
@@ -19,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', function (req, res) {
-    res.send(data)
+    res.sendFile(path.join(__dirname + '/public/createEvent/index1.html'));
 });
 app.get('/event', function (req, res) {
     res.send(data)
