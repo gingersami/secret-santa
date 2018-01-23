@@ -4,8 +4,9 @@ var anchor = $(".row")
 var getEventsFromServer = function () {
     $.ajax({
       method: "GET",
-      url: "/",
+      url: "/getEvent",
       success: function(data) {
+          console.log(data)
         events = data;
         _renderEvents()
       },
@@ -23,3 +24,4 @@ var getEventsFromServer = function () {
       anchor.append(newHTML);
     }
   }
+  getEventsFromServer();

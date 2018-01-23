@@ -33,6 +33,17 @@ app.get('/events', function(req, res){
     res.sendFile(path.join(__dirname + '/public/EventsListed/index2.html'));
 
 })
+
+app.get('/getEvent', function(req,res){
+    Event.find().exec(function(err,data){
+        if (err) throw err
+        else {
+            res.send(data)
+        }
+    })
+})
+
+
 app.post('/event/:eventid', function () {
     var user = new Comment({
         name: req.body.name,
@@ -53,8 +64,7 @@ app.post('/event/:eventid', function () {
 app.post('/createEvent', function (req, res) {
     var event = new Event({
         name: req.body.name,
-        status: true,
-        num:req.body.num
+        status: true
     });
     event.save(function (err, data) {
         if (err) console.log(err);
