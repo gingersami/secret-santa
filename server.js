@@ -39,9 +39,9 @@ app.post('/event/:eventid', function () {
     })
 });
 
-app.get('/createEvent', function (req, res) {
-    res.send(data)
-});
+// app.get('/createEvent', function (req, res) {
+//     res.send(data)
+// });
 app.post('/createEvent', function (req, res) {
     var event = new Event({
         name: req.body.name,
