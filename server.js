@@ -26,6 +26,10 @@ app.get('/', function (req, res) {
 app.get('/event', function (req, res) {
     res.send(data)
 });
+app.get('/events', function(req, res){
+    res.sendFile(path.join(__dirname + '/public/EventsListed/index2.html'));
+
+})
 app.post('/event/:eventid', function () {
     var user = new Comment({
         name: req.body.name,
