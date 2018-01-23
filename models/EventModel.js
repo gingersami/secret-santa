@@ -14,7 +14,8 @@ const User = require('../models/UserModel.js');
 const  eventSchema = new mongoose.Schema({
     name:String,
     users:[User.userSchema],
-    status:Boolean
+    status:Boolean,
+    num:Number
 });
 const Event = mongoose.model('event', eventSchema);
 
