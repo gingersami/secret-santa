@@ -8,7 +8,7 @@ var sendEventToServer = function (name){
         },
         success: function(){
             alert("Event created successfully! sending you to events page")
-          window.location = '/hthth.html'
+          window.location = 'EventsListed/index2.html'
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus);

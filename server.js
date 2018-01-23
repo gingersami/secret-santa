@@ -23,9 +23,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/createEvent/index1.html'));
 });
+
 app.get('/event', function (req, res) {
     res.send(data)
 });
+
 app.post('/event/:eventid', function () {
     var user = new Comment({
         name: req.body.name,
