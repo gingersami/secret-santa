@@ -16,6 +16,7 @@ var sendEventToServer = function (name){
       });
 }
 $("#create-button").on("click", function(){
-    let name=$("#textvalue").val();
+    let name='';
+    name = $("#textvalue").val();
     sendEventToServer(name);
 });
