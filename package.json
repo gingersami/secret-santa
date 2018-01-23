@@ -1,0 +1,29 @@
+{
+  "name": "secret-santa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gingersami/secret-santa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gingersami/secret-santa/issues"
+  },
+  "homepage": "https://github.com/gingersami/secret-santa#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "bootstrap": "4.0.0",
+    "express": "^4.16.2",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.0.1"
+  }
+}
