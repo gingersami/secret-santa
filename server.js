@@ -6,7 +6,7 @@ const Promise = require('bluebird');
 const path = require('path')
 var peeps = [];
 
-mongoose.connect(env.proccess.MONGUL || 'mongodb://localhost:27017/SecretSantaDB', function () {
+mongoose.connect(process.env.MONGUL || 'mongodb://localhost:27017/SecretSantaDB', function () {
     console.log("DB Connected")
 });
 
