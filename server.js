@@ -44,21 +44,53 @@ app.get('/getEvent', function (req, res) {
         }
     })
 })
+// app.get('/getUser', function (req, res) {
+//     User.find().exec(function (err, data) {
+//         if (err) throw err
+//         else {
+//             res.send(data)
+//         }
+//     })
+// })
 app.get('/getUser', function (req, res) {
-    User.find().exec(function (err, data) {
-        if (err) throw err
-        else {
-            res.send(data)
-        }
+    User.User.find({}, (err, users) => {
+        if (err) res.send(err)
+        users.map(user => {
+            peeps.push(user)
+        })
+        res.send(peeps)
     })
+
+    // User.find().exec(function (err, data) {
+    //     if (err) throw err
+    //     else {
+    //         res.send(data)
+    //     }
+    // })
 })
-app.get('/getUser', function (req, res) {
-    User.find().exec(function (err, data) {
-        if (err) throw err
-        else {
-            res.send(data)
-        }
-    })
+const sortUsers = function () {
+    // function getRandomInt(max) {
+    //     return Math.floor(Math.random() * Math.floor(max));
+    // }
+    var length = peeps.length
+
+    for (let i = 0; i < peeps.length; i++) {
+        let random = peeps[(Math.random() * length) | 0];
+        // if (random.status) {
+            peeps[i].status = false;
+            peeps[i].pair.name = peeps[Math.floor(Math.random() * length) | 0].name
+            peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
+            length--
+
+        // }
+    }
+    return peeps
+
+}
+
+app.get('/getMatches', function (req, res) {
+    sortUsers();
+    res.send(peeps);
 })
 
 
@@ -72,6 +104,8 @@ app.post('/event/:eventid', function (req, res) {
                 event: data._id,
                 name: req.body.name,
                 email: req.body.email,
+                status: true,
+                pair: "",
                 prefs: JSON.parse(req.body.prefs)
             });
             user.save()
