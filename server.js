@@ -42,6 +42,14 @@ app.get('/getEvent', function(req,res){
         }
     })
 })
+app.get('/getUser', function(req,res){
+    User.find().exec(function(err,data){
+        if (err) throw err
+        else {
+            res.send(data)
+        }
+    })
+})
 
 
 app.post('/event/:eventid', function () {
