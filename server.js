@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + 'public/createEvent/index1.html'));
+    res.sendFile(path.join(__dirname + '/public/createEvent/index1.html'));
 });
 
 app.get('/event/:eventid', function (req, res) {
