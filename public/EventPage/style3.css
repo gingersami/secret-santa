@@ -193,8 +193,23 @@ form button:hover {
 }
 
 .checkbox {
+  /* margin:0; */
+  padding: 0;
+  max-width: 140px;
     
 }
+.formie{
+  width:600px;
+  margin-left:25%;
+  padding:0;
+  padding-bottom: 15px;
+
+}
+
+.formie label{
+  max-width: 30px;
+}
+
 @-webkit-keyframes square {
   0% {
     transform: translateY(0);
@@ -206,6 +221,9 @@ form button:hover {
 @keyframes square {
   0% {
     transform: translateY(0);
+  }
+  50% {
+    transform:translateY(-400px) rotate(300deg)
   }
   100% {
     transform: translateY(-700px) rotate(600deg);

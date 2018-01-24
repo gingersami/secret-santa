@@ -14,7 +14,8 @@
 
     <div class="wrapper">
         <div class="container">
-            <h1>Create Event</h1>
+            <!-- <h2>Event number {{eventid}}</h2> -->
+            <h1>Register for an Event</h1>
 
             <form class="form-group">
                 <label for="Name">Please Enter your Name</label>
@@ -22,27 +23,38 @@
                 <label for="Email">Please Enter Your Email address</label>
                 <input type="text" placeholder="Email" id="Email">
                 <div class="row">
-                    <div class="form-check form-check-inline">
-                        <input type="checkbox"class="form-check-input checkbox" name="" id="">
-                        <input type="checkbox"class="form-check-input checkbox" name="" id="">
-                        <input type="checkbox"class="form-check-input checkbox" name="" id="">
-                        <input type="checkbox"class="form-check-input checkbox" name="" id="">
+                    <div class="form-check form-check-inline formie">
+                        <input type="checkbox" class="form-check-input checkbox" name="Check" id="Sports">
+                        <label class="form-check-label" for="Sports">Sports </label>
+                        <input type="checkbox" class="form-check-input checkbox" name="Check" id="Outdoors">
+                        <label class="form-check-label" for="Outdoors">Outdoors </label>
+                        <input type="checkbox" class="form-check-input checkbox" name="Check" id="Electronics">
+                        <label class="form-check-label" for="Sports">
+                            Sports
+                        </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-check form-check-inline">
-                        <input type="checkbox" class="form-check-input checkbox" name="" id="">
-                        <input type="checkbox" class="form-check-input checkbox" name="" id="">
-                        <input type="checkbox" class="form-check-input checkbox" name="" id="">
-                        <input type="checkbox" class="form-check-input checkbox" name="" id="">
+                    <div class="form-check form-check-inline formie" id="check-form">
+                        <input type="checkbox" class="form-check-input checkbox" name="Check" id="Toys">
+                        <label class="form-check-label" for="Toys">
+                            Toys
+                        </label>
+                        <input type="checkbox" class="form-check-input checkbox" name="Check" id="Gadgets">
+                        <label class="form-check-label" for ="Gadgets">Gadgets</label>
+                        <input type="checkbox" class="form-check-input checkbox" name="Check" id="Gadgets">
+                        <label class = "form-check-label" for ="Arts">Arts</label>
                     </div>
                 </div>
                 <button type="submit" id="submit-button" type="POST">Create</button>
-                
+
             </form>
         </div>
 
         <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
             <li></li>
             <li></li>
             <li></li>
@@ -58,8 +70,8 @@
 
     </ul>
     </div>
-    <script src="jquery/dist/jquery.js"></script>
-    <script src="handlebars/dist/handlebars.js"></script>
+    <script src="../jquery/dist/jquery.js"></script>
+    <script src="../handlebars/dist/handlebars.js"></script>
     <script src="/EventPage/script3.js"></script>
 </body>
 
