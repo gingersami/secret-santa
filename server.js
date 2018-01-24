@@ -162,6 +162,6 @@ app.post('/createEvent', function (req, res) {
     })
 });
 
-app.listen(env.proccess.PORT || 8080, function () {
+app.listen(process.env.PORT || 8080, function () {
     console.log('Server Listening')
 });
