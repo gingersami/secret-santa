@@ -30,6 +30,9 @@ app.get('/', function (req, res) {
 app.get('/event/:eventid', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/EventPage/index3.html'));
 })
+app.get('/admin', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/AdminMatcher/index4.html'));
+})
 
 app.get('/events', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/EventsListed/index2.html'));
@@ -45,7 +48,7 @@ app.get('/getEvent', function (req, res) {
     })
 })
 app.get('/getUser', function (req, res) {
-    User.find().exec(function (err, data) {
+    User.User.find().exec(function (err, data) {
         if (err) throw err
         else {
             res.send(data)
@@ -54,12 +57,13 @@ app.get('/getUser', function (req, res) {
 })
 app.post('/matchUser', function(req,res){
     console.log(req.params.user)
-    User.findByIdAndUpdate(req.params.id, {$push: {pair : pair}}, function(err, data){
-        if (err) res.send(err)
-        else{
-            res.send(data)
-        }
-    })
+    res.send(req.params.user)
+    // User.findByIdAndUpdate(req.params.id, {$push: {pair : pair}}, function(err, data){
+    //     if (err) res.send(err)
+    //     else{
+    //         // res.send(data)
+    //     }
+    // })
 })
 
 

@@ -8,7 +8,7 @@ const userSchema = new Schema({
     email:String,
     prefs:[],
     status:Boolean,
-    pair: userSchema
+    pair: {type:Schema.Types.ObjectId, ref:'User'}
 });
 
 const User =  mongoose.model('user', userSchema);

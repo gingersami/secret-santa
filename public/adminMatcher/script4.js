@@ -5,8 +5,8 @@ var getUsersFromServer = function () {
     $.ajax({
       method: "GET",
       url: "/getUser",
-      success: function(data) {
-          console.log(data)
+      success: function(users) {
+          console.log(users)
         peeps = users
         _renderUsers()
         sortUsers();
@@ -21,8 +21,8 @@ var getUsersFromServer = function () {
     var source = $('#user-template').html();
     var template = Handlebars.compile(source);
     for (var i = 0; i < peeps.length; i++) {
-      var newHTML = template(events[i]);
-      anchor.append(newHTML);
+      var newHTML = template(peeps[i]);
+      $('#anchor').append(newHTML);
     }
   }
 const sortUsers = function(){
@@ -40,10 +40,11 @@ const postUpdatedMatchedUsers = function(user){
         $.ajax({
             method: "POST",
             url: "/matchUser",
-            data:{
-                user
-            },
-            success: function(){
+            contentType: 'application/json',
+            dataType: 'text',
+            data: user,
+            success: function(data){
+                console.log(data)
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.log(textStatus);
@@ -51,7 +52,12 @@ const postUpdatedMatchedUsers = function(user){
           });
           return false
 }
-
-for (let i=0; i<peeps.length;i++){
-    postUpdatedMatchedUsers(peeps[i])
+function loooooooopy(){
+    for (let i=0; i<peeps.length;i++){
+        let user = JSON.stringify(peeps[i]);
+        postUpdatedMatchedUsers(user)
+        // console.log(peeps[i]);
+    }
 }
+
+$("#cb").on("click", loooooooopy)
