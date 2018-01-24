@@ -6,7 +6,7 @@ const Promise = require('bluebird');
 const path = require('path')
 var peeps = [];
 
-mongoose.connect('mongodb://localhost:27017/SecretSantaDB', function () {
+mongoose.connect(env.proccess.MONGUL || 'mongodb://localhost:27017/SecretSantaDB', function () {
     console.log("DB Connected")
 });
 
@@ -77,10 +77,10 @@ const sortUsers = function () {
     for (let i = 0; i < peeps.length; i++) {
         let random = peeps[(Math.random() * length) | 0];
         // if (random.status) {
-            peeps[i].status = false;
-            peeps[i].pair.name = peeps[Math.floor(Math.random() * length) | 0].name
-            peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
-            length--
+        peeps[i].status = false;
+        // peeps[i].pair.name = peeps[Math.floor(Math.random() * length) | 0].name
+        peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
+        length--
 
         // }
     }
@@ -89,8 +89,29 @@ const sortUsers = function () {
 }
 
 app.get('/getMatches', function (req, res) {
-    sortUsers();
-    res.send(peeps);
+    oftesting();
+
+    function oftesting() {
+        // Get the count of all users
+        User.User.count({
+            status: true
+        }).exec(function (err, count) {
+
+            // Get a random entry
+            var random = Math.floor(Math.random() * count)
+
+            // Again query all users but only fetch one offset by our random #
+            User.User.findOne({}).skip(random).exec(
+                function (err, result) {
+                    // Tada! random user
+                    res.send(result)
+                    
+                })
+                
+        })
+
+        // res.send(result._id)
+    }
 })
 
 
@@ -141,6 +162,6 @@ app.post('/createEvent', function (req, res) {
     })
 });
 
-app.listen(8080, function () {
+app.listen(env.proccess.PORT || 8080, function () {
     console.log('Server Listening')
 });
