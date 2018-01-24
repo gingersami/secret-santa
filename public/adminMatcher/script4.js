@@ -20,7 +20,6 @@ const sortUsers = function(){
     for (let i=0; i<peeps.length;i++){
         let random = peeps[Math.floor(Math.random()*peeps.length)];
         if (random.status){
-            random.status=false;
             peeps[i].status=false;
             peeps[i].pair.name=random.name;
             peeps[i].pair.email=random.email;
@@ -29,9 +28,24 @@ const sortUsers = function(){
     }
 }
 const postUpdatedMatchedUsers = function(user){
-    // Ajax request for posting updates
+        $.ajax({
+            method: "POST",
+            url: "/matchUser",
+            data:{
+                pair:{
+                    name: name,
+                    email:email
+                }
+            },
+            success: function(){
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus);
+            }
+          });
+          return false
     succes: function(){
-        User.select({id:i+1}).findOneAndUpdate()
+        
     }
 }
 getUsersFromServer();
