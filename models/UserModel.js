@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+var ref = require('../models/EventModel.js')
+
+const userSchema = new Schema({
     name:String,
+    event: { type: Schema.Types.ObjectId, ref: 'ref' },
     email:String,
-    prefs:[String],
+    prefs:[],
     status:Boolean,
     pair: userSchema
 });

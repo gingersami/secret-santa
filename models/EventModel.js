@@ -2,6 +2,8 @@ const Promise = require("bluebird");
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const User = require('../models/UserModel.js');
+var Schema = mongoose.Schema;
+const ref = User.User
 
 
 
@@ -12,9 +14,9 @@ const User = require('../models/UserModel.js');
 //     prefs:[String]
 // })
 
-const  eventSchema = new mongoose.Schema({
+const  eventSchema = new Schema({
     name:String,
-    users:[User.userSchema],
+    users: [{ type: Schema.Types.ObjectId, ref: 'ref' }],
     status:Boolean,
     num:Number
 });
