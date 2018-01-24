@@ -1,13 +1,14 @@
+$(document).ready(function () {
 function createUser(values,email,name){
 $.ajax({
     method: "POST",
-    url: "/event/" + window.location.pathname,
+    url: window.location.origin + window.location.pathname,
+    dataType:'json',
     data: {
         name: name,
         email:email,
-        pref:values
+        prefs:JSON.stringify(values)
     },
-    dataType:json,
     
     success: function () {
         alert("Event created successfully! sending you to events page")
@@ -17,11 +18,10 @@ $.ajax({
         console.log(textStatus);
     }
 });
-return false
+// return false
 }
 
 $('#submit-button').on('click',function(){
-    var pref =[]
     var email = $('#Email').val();
     var name = $('#Name').val();
     var values = [],
@@ -31,5 +31,6 @@ $('#submit-button').on('click',function(){
         if (inputs[i].type === "checkbox" && inputs[i].checked)
             values.push(inputs[i].id);
     createUser(values,email, name)    
+})
 })
 

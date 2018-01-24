@@ -89,6 +89,7 @@ body {
 .thumbnail img {
     width:765px;
     height: 400px;
+    /* box-shadow:0, 8px, #0080ff; */
 }
 .thumbnail{
     background-color:inherit
