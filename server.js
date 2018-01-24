@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Promise = require('bluebird');
 const path = require('path')
-
+var peeps = [];
 
 mongoose.connect('mongodb://localhost:27017/SecretSantaDB', function () {
     console.log("DB Connected")
@@ -50,6 +50,14 @@ app.get('/getUser', function(req,res){
         }
     })
 })
+app.get('/getUser', function(req,res){
+    User.find().exec(function(err,data){
+        if (err) throw err
+        else {
+            res.send(data)
+        }
+    })
+})
 
 
 app.post('/event/:eventid', function () {
@@ -59,6 +67,19 @@ app.post('/event/:eventid', function () {
         pref: req.body.pref
     });
     Event.findByIdAndUpdate(req.params.eventid, { $push: { prefs: pref } }, function (err, data) {
+        if (err) res.send(err);
+        else {
+            res.send(data)
+        }
+    })
+});
+app.post('/event/:eventid', function () {
+
+    
+    
+            }
+        }
+    User.select({id:req.params.id}).findOneAndUpdate(    
         if (err) res.send(err);
         else {
             res.send(data)
