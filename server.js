@@ -69,21 +69,34 @@ app.get('/getUser/:eventid', function (req, res) {
     return peeps
 })
 
-const sortUsers = function () {
-    // function getRandomInt(max) {
-    //     return Math.floor(Math.random() * Math.floor(max));
-    // }
-    let length = peeps[0].users.length
-    console.log(peeps.users)
+// const sortUsers = function () {
+//     function getRandomInt(max) {
+//     //     return Math.floor(Math.random() * Math.floor(max));
+//     // }
+//     let length = peeps[0].users.length
+//     // console.log(peeps.users)
 
+function genrator(array, number, conditionA){
+    let random = Math.floor(Math.random()*number)
+    let randomArrItem = array[random]
+    if(randomArrItem.name!==conditionA && randomArrItem.statusGet===true){
+        return random
+    }
+    else{
+        generator(number, conditionA, conditionB)
+    }
+}
+const sortUsers = function(){
     for (let i = 0; i < peeps[0].users.length; i++) {
-        let random = peeps[0].users[(Math.random() * length) | 0];
-        if (peeps[0].users[i].status) {
-            peeps[0].users[i].status = false;
-            peeps[0].users[i].pair.name = peeps[0].users[Math.floor(Math.random() * length) | 0].name
+        // let random = peeps[0].users[(Math.random() * length) | 0];
+        if (peeps[0].users[i].statusGive) {
+            let uniqueRandom = generator(peeps[0].users, peeps[0].users.length, peeps[0].users[i].name)
+            peeps[0].users[i].statusGive = false; 
+            peeps[0].users[uniqueRandom].statusGet=false;
+            peeps[0].users[i].pair.name = peeps[0].users[uniqueRandom];
+            // peeps[0].users[Math.floor(Math.random() * length) | 0].name
             // peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
             // length--
-
         }
     }
     return peeps
@@ -107,7 +120,8 @@ app.post('/event/:eventid', function (req, res) {
                 event: data._id,
                 name: req.body.name,
                 email: req.body.email,
-                status: true,
+                statusGive: true,
+                statusGet: true,
                 pair: "",
                 prefs: JSON.parse(req.body.prefs)
             });

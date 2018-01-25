@@ -7,7 +7,8 @@ const userSchema = new Schema({
     event: { type: Schema.Types.ObjectId, ref: 'ref' },
     email:String,
     prefs:[],
-    status:Boolean,
+    statusGive:Boolean,
+    statusGet:Boolean,
     pair: {
         name: String,
         email: String
