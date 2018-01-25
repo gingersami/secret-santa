@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const User = require('../models/UserModel.js');
 var Schema = mongoose.Schema;
-const ref = User.User
+const users = User.User
 
 
 
@@ -16,7 +16,7 @@ const ref = User.User
 
 const  eventSchema = new Schema({
     name:String,
-    users: [{ type: Schema.Types.ObjectId, ref: 'ref' }],
+    users: [{ type: Schema.Types.ObjectId, ref: 'users' }],
     status:Boolean,
     num:Number
 });
