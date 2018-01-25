@@ -8,7 +8,10 @@ const userSchema = new Schema({
     email:String,
     prefs:[],
     status:Boolean,
-    pair: userSchema
+    pair: {
+        name: String,
+        email: String
+    }
 });
 
 const User =  mongoose.model('user', userSchema);
@@ -16,19 +19,3 @@ module.exports={
     userSchema:userSchema,
     User:User
 }
-
-// var partner = somePartner;
-
-// findById(id, function(err, data){
-//     data.pair = partner;
-//     data.save() 
-// })
-
-// app.get('/partnerUsers', function(req, res){
-//     find(users, function(err, users){
-//         //sort users
-//         for(){}
-//         res.send(users)
-//     })
-// })
-
