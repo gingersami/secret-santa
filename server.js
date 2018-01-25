@@ -68,6 +68,7 @@ app.get('/getUser', function (req, res) {
     //     }
     // })
 })
+
 const sortUsers = function () {
     // function getRandomInt(max) {
     //     return Math.floor(Math.random() * Math.floor(max));
@@ -91,6 +92,7 @@ const sortUsers = function () {
 app.get('/getMatches', function (req, res) {
     sortUsers();
     res.send(peeps);
+
 })
 
 

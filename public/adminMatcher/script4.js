@@ -9,6 +9,7 @@ var getUsersFromServer = function () {
           console.log(data)
         peeps = users
         _renderUsers()
+        sortUsers();
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus);
@@ -16,26 +17,31 @@ var getUsersFromServer = function () {
     });
   };
 
+  function _renderUsers() {
+    var source = $('#user-template').html();
+    var template = Handlebars.compile(source);
+    for (var i = 0; i < peeps.length; i++) {
+      var newHTML = template(events[i]);
+      anchor.append(newHTML);
+    }
+  }
 const sortUsers = function(){
     for (let i=0; i<peeps.length;i++){
         let random = peeps[Math.floor(Math.random()*peeps.length)];
         if (random.status){
             peeps[i].status=false;
-            peeps[i].pair.name=random.name;
-            peeps[i].pair.email=random.email;
-
+            peeps[i].pair = random;
         }
     }
 }
+
+getUsersFromServer();
 const postUpdatedMatchedUsers = function(user){
         $.ajax({
             method: "POST",
             url: "/matchUser",
             data:{
-                pair:{
-                    name: name,
-                    email:email
-                }
+                user
             },
             success: function(){
             },
@@ -44,8 +50,8 @@ const postUpdatedMatchedUsers = function(user){
             }
           });
           return false
-    succes: function(){
-        
-    }
 }
-getUsersFromServer();
+
+for (let i=0; i<peeps.length;i++){
+    postUpdatedMatchedUsers(peeps[i])
+}
