@@ -12,7 +12,7 @@ var getUsersFromServer = function () {
       success: function(data) {
           console.log(data)
         peeps = data[0].users
-        _renderUsers()
+        _renderMixedUsers()
         // sortUsers();
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -29,6 +29,15 @@ var getUsersFromServer = function () {
       $('#anchor').append(newHTML);
     }
   }
+  function _renderMixedUsers() {
+    $('#anchor').empty();
+    var source = $('#mixed-template').html();
+    var template = Handlebars.compile(source);
+    for (var i = 0; i < peeps.length; i++) {
+      var newHTML = template(peeps[i]);
+      $('#anchor').append(newHTML);
+    }
+  }
 
 
 function getUsers(){
@@ -36,7 +45,9 @@ function getUsers(){
     method:"GET",
     url:'/getUser/'+s.match(r),
     success:function(data){
+      peeps = data[0].users
       console.log(data[0].users)
+      _renderUsers()
     },
     error:function(jqXHR,textStatus,errorThrown){
       console.log(textStatus)
@@ -45,6 +56,7 @@ function getUsers(){
 }
 
 $('button').on('click', function(){
+
   getUsersFromServer()
 })
 
