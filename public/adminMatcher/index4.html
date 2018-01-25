@@ -13,12 +13,12 @@
 <body>
     <div class="container">
         <div class="row">
-        <div id="anchor"class="col-sm-1 col-md-12">My Anchor DIV</div>
+        <div id="anchor"class="col-sm-1 col-md-12"></div>
         </div>
         <button>Randomize</button>
     </div>
 
-    <script id="user-template" type="text/x-handlebars-template">
+    <script id="mixed-template" type="text/x-handlebars-template">
         <div class="row">
             <div class="col-sm-6 col-md-4 test">
                 <ul class="list-group">
@@ -33,6 +33,16 @@
             </div>
         </div>
         </div>
+    </script>
+
+    <script id ="user-template" type="text/x-handlebars-template">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 test">
+                <ul class="list-group">
+                    <li class="list-group-item">{{name}}</li>
+                </ul>
+            </div> 
+        </div>   
     </script>
     <script src="../jquery/dist/jquery.js"></script>
     <script src="../handlebars/dist/handlebars.js"></script>
