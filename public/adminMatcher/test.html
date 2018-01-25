@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Event Gallery</title>
+
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="EventsListed/thumbnail-gallery.css">
+
+</head>
+
+<body>
+
+    <div class="container gallery-container">
+
+        <h1>Events Gallery</h1>
+
+        <p class="page-description text-center">אירועי גמד וענק - Secret Santa Events</p>
+
+        <div class="tz-gallery">
+
+        <div class="row">
+        </div>
+    </div>
+</div>
+
+
+<ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<script id="event-template" type="text/x-handlebars-template">
+    <div class="container">
+    <div class="col-md-2">
+        <img src="https://i.imgur.com/d3r38MB.png" class="img-responsive">
+    </div>
+
+    <div class="col-sm-6 col-md-8 son"> 
+            <h3 class="caption">{{name}}</h3>
+        <div class="thumbnail">
+            <a class="lightbox" href="/event/{{id}}">
+                <img src="../Assets/asset{{id}}.jpeg" class = "img-responsive">
+                        <!-- <h3 class="caption">{{name}}</h3> -->
+            </a>
+        </div>
+    <!-- <div class="caption">
+                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+    <!-- </div> -->
+        
+    </div>
+    <div class="col-md-2"> Wohoooo!</div>
+</div>
+</script>
+
+<script src="jquery/dist/jquery.js"></script>
+<script src="handlebars/dist/handlebars.js"></script>
+<script src="EventsListed/script2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+
+</body>
+
+</html>

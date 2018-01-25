@@ -1,6 +1,6 @@
 
 var events=[]; 
-var anchor = $(".row")
+var anchor = $(".events")
 var getEventsFromServer = function () {
     $.ajax({
       method: "GET",

@@ -26,45 +26,56 @@
 
         <div class="tz-gallery">
 
-        <div class="row">
+            <div class="container events">
+            </div>
         </div>
     </div>
-</div>
 
 
-<ul class="bg-bubbles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 
-<script id="event-template" type="text/x-handlebars-template">
-    <div class="col-sm-6 col-md-9 test">
-        <div class="thumbnail">
+    <!-- <div class="col-md-2 col-md-offset-2">
+    <img src="https://i.imgur.com/d3r38MB.png" class="img-fluid">
+    </div> -->
+    <!-- position absolute
+    position relative on the body -->
+
+    <script id="event-template" type="text/x-handlebars-template">
+    <div class="row">
+
+        <div class="col-md-2"></div>
+        <a href="/event/{{id}}" >
+    <div class="col-md-8" style="background: url('../Assets/asset{{id}}.jpeg') bottom center no-repeat; background-size: cover; height: 266px;"> 
+
+            <h3 class="caption">{{name}}</h3>
+        <!-- <div class="thumbnail">
             <a class="lightbox" href="/event/{{id}}">
-                <img src="../Assets/asset{{id}}.jpeg" class = "son">
-                        <h3 class="caption">{{name}}</h3>
+                <!-- <img src="../Assets/asset{{id}}.jpeg" class = "img-fluid rounded col-md-8"> -->
+                        <!-- <h3 class="caption">{{name}}</h3> -->
             </a>
         </div>
-    <!-- <div class="caption">
-                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
-    <!-- </div> -->
+    </a>
         
     </div>
+</div>
 </script>
 
-<script src="jquery/dist/jquery.js"></script>
-<script src="handlebars/dist/handlebars.js"></script>
-<script src="EventsListed/script2.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-<script>
-    baguetteBox.run('.tz-gallery');
-</script>
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="handlebars/dist/handlebars.js"></script>
+    <script src="EventsListed/script2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script>
+        baguetteBox.run('.tz-gallery');
+    </script>
 
 </body>
 
