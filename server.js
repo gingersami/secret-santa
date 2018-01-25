@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const Event = require('./models/EventModel.js');
+const User = require('./models/UserModel.js');
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Promise = require('bluebird');
@@ -9,9 +11,6 @@ var peeps = [];
 mongoose.connect(process.env.MONGUL||'mongodb://localhost:27017/SecretSantaDB', function () {
     console.log("DB Connected")
 });
-
-const Event = require('./models/EventModel.js');
-const User = require('./models/UserModel.js');
 
 const app = express();
 
@@ -36,6 +35,13 @@ app.get('/events', function (req, res) {
 
 })
 
+app.get('/admin/:eventid', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/adminMatcher/index4.html'));
+
+})
+
+
+
 app.get('/getEvent', function (req, res) {
     Event.find().exec(function (err, data) {
         if (err) throw err
@@ -52,38 +58,46 @@ app.get('/getEvent', function (req, res) {
 //         }
 //     })
 // })
-app.get('/getUser', function (req, res) {
-    User.User.find({}, (err, users) => {
-        if (err) res.send(err)
-        users.map(user => {
-            peeps.push(user)
-        })
-        res.send(peeps)
-    })
+app.get('/getUser/:eventid', function (req, res) {
 
-    // User.find().exec(function (err, data) {
-    //     if (err) throw err
-    //     else {
-    //         res.send(data)
-    //     }
-    // })
+    Event.find({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,users){
+        if (err) res.send(err)
+        console.log(req.body)
+        peeps = users
+        res.send(users)
+    })
+    return peeps
 })
 
-const sortUsers = function () {
-    // function getRandomInt(max) {
-    //     return Math.floor(Math.random() * Math.floor(max));
-    // }
-    var length = peeps.length
+// const sortUsers = function () {
+//     function getRandomInt(max) {
+//     //     return Math.floor(Math.random() * Math.floor(max));
+//     // }
+//     let length = peeps[0].users.length
+//     // console.log(peeps.users)
 
-    for (let i = 0; i < peeps.length; i++) {
-        let random = peeps[(Math.random() * length) | 0];
-        // if (random.status) {
-            peeps[i].status = false;
-            peeps[i].pair.name = peeps[Math.floor(Math.random() * length) | 0].name
-            peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
-            length--
-
-        // }
+function genrator(array, number, conditionA){
+    let random = Math.floor(Math.random()*number)
+    let randomArrItem = array[random]
+    if(randomArrItem.name!==conditionA && randomArrItem.statusGet===true){
+        return random
+    }
+    else{
+        generator(number, conditionA, conditionB)
+    }
+}
+const sortUsers = function(){
+    for (let i = 0; i < peeps[0].users.length; i++) {
+        // let random = peeps[0].users[(Math.random() * length) | 0];
+        if (peeps[0].users[i].statusGive) {
+            let uniqueRandom = generator(peeps[0].users, peeps[0].users.length, peeps[0].users[i].name)
+            peeps[0].users[i].statusGive = false; 
+            peeps[0].users[uniqueRandom].statusGet=false;
+            peeps[0].users[i].pair.name = peeps[0].users[uniqueRandom];
+            // peeps[0].users[Math.floor(Math.random() * length) | 0].name
+            // peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
+            // length--
+        }
     }
     return peeps
 
@@ -106,7 +120,8 @@ app.post('/event/:eventid', function (req, res) {
                 event: data._id,
                 name: req.body.name,
                 email: req.body.email,
-                status: true,
+                statusGive: true,
+                statusGet: true,
                 pair: "",
                 prefs: JSON.parse(req.body.prefs)
             });
