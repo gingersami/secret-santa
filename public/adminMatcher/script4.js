@@ -1,7 +1,7 @@
-// REGEX
-var r = /\d+/;
-var s = window.location.pathname;
-// REGEX
+// // REGEX
+// var r = /\d+/;
+// var s = window.location.pathname;
+// // REGEX
 getUsers();
 var peeps = [];
 
