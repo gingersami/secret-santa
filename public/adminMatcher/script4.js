@@ -2,7 +2,7 @@
 // var r = /\d+/;
 // var s = window.location.pathname;
 // // REGEX
-getUsers();
+// getUsers();
 var peeps = [];
 
 var getUsersFromServer = function () {
@@ -40,20 +40,20 @@ var getUsersFromServer = function () {
   }
 
 
-function getUsers(){
-  $.ajax({
-    method:"GET",
-    url:'/getUser/'+s.match(r),
-    success:function(data){
-      peeps = data[0].users
-      console.log(data[0].users)
-      _renderUsers()
-    },
-    error:function(jqXHR,textStatus,errorThrown){
-      console.log(textStatus)
-    }
-  })
-}
+// function getUsers(){
+//   $.ajax({
+//     method:"GET",
+//     url:'/getUser/'+s.match(r),
+//     success:function(data){
+//       peeps = data[0].users
+//       console.log(data[0].users)
+//       _renderUsers()
+//     },
+//     error:function(jqXHR,textStatus,errorThrown){
+//       console.log(textStatus)
+//     }
+//   })
+// }
 
 $('button').on('click', function(){
 
