@@ -5,8 +5,7 @@ const User = require('./models/UserModel.js');
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Promise = require('bluebird');
-const path = require('path')
-var peeps = [];
+const path = require('path');
 
 mongoose.connect(process.env.MONGUL||'mongodb://localhost:27017/SecretSantaDB', function () {
     console.log("DB Connected")
@@ -60,13 +59,12 @@ app.get('/getEvent', function (req, res) {
 // })
 app.get('/getUser/:eventid', function (req, res) {
 
-    Event.find({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,users){
+    Event.find({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,event){
         if (err) res.send(err)
         console.log(req.body)
-        peeps = users
-        res.send(users)
+        // peeps = users
+        res.send(event)
     })
-    return peeps
 })
 
 // const sortUsers = function () {
@@ -76,24 +74,24 @@ app.get('/getUser/:eventid', function (req, res) {
 //     let length = peeps[0].users.length
 //     // console.log(peeps.users)
 
-function genrator(array, number, conditionA){
+function genrator(array, number, currentUserName){
     let random = Math.floor(Math.random()*number)
     let randomArrItem = array[random]
-    if(randomArrItem.name!==conditionA && randomArrItem.statusGet===true){
+    if(randomArrItem.name!==currentUserName && randomArrItem.statusGet===true){
         return random
     }
     else{
-        generator(number, conditionA, conditionB)
+       return generator(number, conditionA, conditionB)
     }
 }
-const sortUsers = function(){
-    for (let i = 0; i < peeps[0].users.length; i++) {
-        // let random = peeps[0].users[(Math.random() * length) | 0];
-        if (peeps[0].users[i].statusGive) {
-            let uniqueRandom = generator(peeps[0].users, peeps[0].users.length, peeps[0].users[i].name)
-            peeps[0].users[i].statusGive = false; 
-            peeps[0].users[uniqueRandom].statusGet=false;
-            peeps[0].users[i].pair.name = peeps[0].users[uniqueRandom];
+const sortUsers = function(event){
+    for (let i = 0; i < event.users.length; i++) {
+        // let random = event.users[(Math.random() * length) | 0];
+        if (event.users[i].shouldGiveTo) {
+            let uniqueRandom = generator(event.users, event.users.length, event.users[i].name)
+            // event.users[i].statusGie = false; 
+            event.users[uniqueRandom].statusGet=false;
+            event.users[i].shouldGiveTo = event.users[uniqueRandom];
             // peeps[0].users[Math.floor(Math.random() * length) | 0].name
             // peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
             // length--
@@ -104,9 +102,12 @@ const sortUsers = function(){
 }
 
 app.get('/getMatches', function (req, res) {
-    sortUsers();
-    res.send(peeps);
+    Event.find({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,event){
+        peeps = sortUsers(event);
 
+        // save data! - return data  only after save success!
+        res.send(peeps);
+    });
 })
 
 
