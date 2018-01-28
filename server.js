@@ -77,36 +77,44 @@ app.get('/getUser/:eventid', function (req, res) {
 function genrator(array, number, currentUserName){
     let random = Math.floor(Math.random()*number)
     let randomArrItem = array[random]
-    if(randomArrItem.name!==currentUserName && randomArrItem.statusGet===true){
+    if(randomArrItem.name!==currentUserName && randomArrItem.statusGet===false){
         return random
     }
     else{
-       return generator(number, conditionA, conditionB)
+       return generator(array, number, currentUserName)
     }
 }
 const sortUsers = function(event){
     for (let i = 0; i < event.users.length; i++) {
         // let random = event.users[(Math.random() * length) | 0];
-        if (event.users[i].shouldGiveTo) {
+        if (!event.users[i].recipient) {
             let uniqueRandom = generator(event.users, event.users.length, event.users[i].name)
             // event.users[i].statusGie = false; 
-            event.users[uniqueRandom].statusGet=false;
-            event.users[i].shouldGiveTo = event.users[uniqueRandom];
+            event.users[uniqueRandom].statusGet=true;
+            event.users[i].recipient = event.users[uniqueRandom];
             // peeps[0].users[Math.floor(Math.random() * length) | 0].name
             // peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
             // length--
         }
     }
-    return peeps
+    return event.users
 
 }
 
 app.get('/getMatches', function (req, res) {
+    let peeps = [];
     Event.find({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,event){
         peeps = sortUsers(event);
-
+        peeps.save(function(err, data){
+            if (err){ 
+                console.log(err)
+            }
+            else{
+                res.send(peeps);
+            }
+        })
         // save data! - return data  only after save success!
-        res.send(peeps);
+        // res.send(peeps);
     });
 })
 
@@ -121,9 +129,8 @@ app.post('/event/:eventid', function (req, res) {
                 event: data._id,
                 name: req.body.name,
                 email: req.body.email,
-                statusGive: true,
-                statusGet: true,
-                pair: "",
+                statusGet: false,
+                recipient: undefined,
                 prefs: JSON.parse(req.body.prefs)
             });
             user.save()
@@ -152,7 +159,9 @@ app.post('/createEvent', function (req, res) {
         users: []
     });
     event.save(function (err, data) {
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+        }
         else {
             res.send(data)
         }
