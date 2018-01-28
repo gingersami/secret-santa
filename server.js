@@ -85,19 +85,19 @@ function genrator(array, number, currentUserName){
     }
 }
 const sortUsers = function(event){
-    for (let i = 0; i < event.users.length; i++) {
+    for (let i = 0; i < event.users[0].length; i++) {
         // let random = event.users[(Math.random() * length) | 0];
         if (!event.users[i].recipient) {
-            let uniqueRandom = generator(event.users, event.users.length, event.users[i].name)
+            let uniqueRandom = generator(event.users[0], event.users[0].length, event.users[0][i].name)
             // event.users[i].statusGie = false; 
-            event.users[uniqueRandom].statusGet=true;
-            event.users[i].recipient = event.users[uniqueRandom];
+            event.users[0][uniqueRandom].statusGet=true;
+            event.users[0][i].recipient = event.users[uniqueRandom];
             // peeps[0].users[Math.floor(Math.random() * length) | 0].name
             // peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
             // length--
         }
     }
-    return event.users
+    return event.users[0]
 
 }
 
