@@ -108,6 +108,7 @@ app.get('/getMatches', function (req, res) {
         peeps.save(function(err, data){
             if (err){ 
                 console.log(err)
+                console.log(peeps);
             }
             else{
                 res.send(peeps);
