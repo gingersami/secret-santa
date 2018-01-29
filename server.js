@@ -97,18 +97,18 @@ const sortUsers = function(event){
             // length--
         }
     }
-    return event.users[0]
+    return event.users
 
 }
 
-app.get('/getMatches', function (req, res) {
+app.get('/getMatches/:eventid', function (req, res) {
     let peeps = [];
-    Event.find({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,event){
-        peeps = sortUsers(event);
+    Event.findOne({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,event){
+    peeps = sortUsers(event);
         peeps.save(function(err, data){
-            if (err){ 
+            if (err){
                 console.log(err)
-                console.log(peeps);
+                console.log(peeps)
             }
             else{
                 res.send(peeps);
