@@ -1,6 +1,6 @@
 // // REGEX
-// var r = /\d+/;
-// var s = window.location.pathname;
+var r = /\d+/;
+var s = window.location.pathname;
 // // REGEX
 // getUsers();
 var peeps = [];
@@ -8,10 +8,10 @@ var peeps = [];
 var getUsersFromServer = function () {
     $.ajax({
       method: "GET",
-      url: "/getMatches",
+      url: "/getMatches/"+s.match(r),
       success: function(data) {
-          console.log(data)
-        peeps = data[0].users
+        peeps = data.users
+          console.log(peeps)
         _renderMixedUsers()
         // sortUsers();
       },

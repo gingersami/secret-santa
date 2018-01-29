@@ -74,7 +74,7 @@ app.get('/getUser/:eventid', function (req, res) {
 //     let length = peeps[0].users.length
 //     // console.log(peeps.users)
 
-function genrator(array, number, currentUserName){
+function generator(array, number, currentUserName){
     let random = Math.floor(Math.random()*number)
     let randomArrItem = array[random]
     if(randomArrItem.name!==currentUserName && randomArrItem.statusGet===false){
@@ -84,14 +84,14 @@ function genrator(array, number, currentUserName){
        return generator(array, number, currentUserName)
     }
 }
-const sortUsers = function(event){
-    for (let i = 0; i < event.users[0].length; i++) {
+function sortUsers(event){
+    for (let i = 0; i < event.users.length; i++) {
         // let random = event.users[(Math.random() * length) | 0];
         if (!event.users[i].recipient) {
-            let uniqueRandom = generator(event.users[0], event.users[0].length, event.users[0][i].name)
+            let uniqueRandom = generator(event.users, event.users.length, event.users[i].name)
             // event.users[i].statusGie = false; 
-            event.users[0][uniqueRandom].statusGet=true;
-            event.users[0][i].recipient = event.users[uniqueRandom];
+            event.users[uniqueRandom].statusGet=true;
+            event.users[i].recipient = event.users[uniqueRandom]._id;
             // peeps[0].users[Math.floor(Math.random() * length) | 0].name
             // peeps[i].pair.email = peeps[(Math.random() * length) | 0].email
             // length--
@@ -105,15 +105,19 @@ app.get('/getMatches/:eventid', function (req, res) {
     let peeps = [];
     Event.findOne({id:req.params.eventid}).populate({ path: 'users', model: User.User }).exec(function(err,event){
     peeps = sortUsers(event);
-        peeps.save(function(err, data){
-            if (err){
-                console.log(err)
-                console.log(peeps)
-            }
-            else{
-                res.send(peeps);
-            }
-        })
+    if (err) res.send(err);
+        else{
+        res.send(peeps)
+    }
+        // peeps.save(function(err, data){
+        //     if (err){
+        //         console.log(err)
+        //         console.log(peeps)
+        //     }
+        //     else{
+        //         res.send(peeps);
+        //     }
+        // })
         // save data! - return data  only after save success!
         // res.send(peeps);
     });

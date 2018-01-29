@@ -9,10 +9,7 @@ const userSchema = new Schema({
     prefs:[],
     statusGive:Boolean,
     statusGet:Boolean,
-    pair: {
-        name: String,
-        email: String
-    }
+    recipient: {type:Schema.Types.ObjectId, ref:'User'}
 });
 
 const User =  mongoose.model('user', userSchema);
