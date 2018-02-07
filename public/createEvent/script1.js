@@ -17,8 +17,8 @@ $(document).ready(function(){
         return false
     }
     $(document).ready(function(){
-    $("#create-button").on("click", function (e) {
-        e.preventdefault();
+    $("#create-button").on("click", function () {
+        // e.preventdefault();
         let name = '';
         name = $("#textvalue").val();
         sendEventToServer(name);
